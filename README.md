@@ -1,4 +1,3 @@
-# riscv-embedded-systems
 # RISC-V Embedded Systems – Bare-Metal Firmware Projects  
 Firmware Development on SiFive FE310-G002 (RISC-V Architecture)
 
