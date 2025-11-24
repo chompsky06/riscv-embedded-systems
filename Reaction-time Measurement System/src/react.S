@@ -1,16 +1,3 @@
-# ------------------------------------------------------------------
-# Student Information
-# ------------------------------------------------------------------
-# Lab number            : 3
-# Group number          : 39
-# Section number        : 202
-# Student-1 name        : Victoria Gao
-# Student-2 name        : Arushi Basu
-# ------------------------------------------------------------------
-# -------------- YOUR CODE MUST BE WELL COMMENTED ------------------
-# -------------- YOU MAY REMOVE UNNECESSARY COMMENTS ---------------
-# ------------------------------------------------------------------
-
 .section .text
 .align 2
 .globl _start
@@ -21,7 +8,7 @@ _start:
 
     # Define the GPIO control register base address and offsets
     # (Output enable, output value, input enable, input value, etc.)
-    # -----------------------------write the instructions here-----------------------------
+   
     .equ GPIO_BASE_CTRL_ADDR,   0x10012000      # Base address for GPIO control registers
     .equ GPIO_OUTPUT_EN,        0x08            # Offset to enable GPIO outputs
     .equ GPIO_INPUT_EN,        0x04            # Offset to enable GPIO outputs
@@ -30,7 +17,7 @@ _start:
 
     # Define GPIO Pin Mapping for LEDs (8 LEDs in LED bar, LED6)
     # Optional: you may also configure the 7-segment display pins
-    # -----------------------------write the instructions here-----------------------------
+    
      # LED Pin Masks
     .equ GPIO_7SEGLED_PINS, 0x0000023F          # Seven Segment LED Display Pins (7)
     .equ GPIO_ALL_LED_PINS, 0x00fc0e3f          # All LED Pins (15)
@@ -38,24 +25,24 @@ _start:
     .equ GPIO_LEDBAR_LED_6, 0x00400000          # LED 6
    
     # Configure the GPIO Outputs for all LEDs
-    # -----------------------------write the instructions here-----------------------------
+     
     la t0, GPIO_BASE_CTRL_ADDR      # Load base adress to t0
     li t1, GPIO_ALL_LED_PINS        # Load bit mask for all LEDs to t1
     sw t1, GPIO_OUTPUT_EN(t0)       # Store bit mask at the output enable address
 
     # Define GPIO Pin Mapping for Pushbuttons (S1, S2, and both)
-    # -----------------------------write the instructions here-----------------------------
+     
     .equ GPIO_PUSHBUTTON_1, 0x00001000          # PUSH BUTTON 1
     .equ GPIO_PUSHBUTTON_2, 0x00002000          # PUSH BUTTON 2
     .equ GPIO_PUSHBUTTONS, 0x00003000          # BOTH PUSH BUTTONS
 
     # Configure the GPIO Inputs for the pushbuttons used (S1, S2, or both)
-    # -----------------------------write the instructions here-----------------------------
+     
     li t1, GPIO_PUSHBUTTONS         # load bit mask for both push buttons to t1
     sw t1, GPIO_INPUT_EN(t0)        # store bit mask at input enable address
 
     # Turn off all LEDs
-    # -----------------------------write the instructions here-----------------------------
+     
     li t1, GPIO_ALL_LED_PINS      # Load bit mask for all LEDs to t1
     sw x0, GPIO_OUTPUT_VAL(t0)    # Store bit mask at the output value address
 
@@ -68,7 +55,7 @@ InitRandomNum:
 
 # -------------------Task 1: LED Binary Counter and GPIO Verification----------------------
     Task_1:
-    # -----------------------------write the instructions here-----------------------------
+     
     li s0, 0            # counter
     li s1, 0x100        # OxFF + 1
 
@@ -105,7 +92,7 @@ InitRandomNum:
 
 # ----------------------------------Task 2: Reflex Meter-----------------------------------
 Task_2:
-    # -----------------------------write the instructions here-----------------------------
+     
     sw x0, GPIO_OUTPUT_VAL(t0)      # turning off LEDs
     jal ra, RandomNum               # generating random number
     jal ra, Scale                   # scaling the random number for a delay between 2-10 seconds
@@ -214,8 +201,8 @@ RandomNum:
     ret                             # Return from subroutine
 
 # ---------------------------- DELAY ROUTINES -----------------------
-# Create as much as you need.
 # Delays
+
 binary_counter_delay:
 addi s5,s5,-1
 bnez s5, binary_counter_delay
